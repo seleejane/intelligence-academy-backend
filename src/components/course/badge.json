@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_course_badges",
+  "info": {
+    "displayName": "Course Badge"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

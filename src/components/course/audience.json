@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_course_audiences",
+  "info": {
+    "displayName": "Course Audience"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

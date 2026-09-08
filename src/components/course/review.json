@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_course_reviews",
+  "info": {
+    "displayName": "Course Review"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "rating": {
+      "type": "integer",
+      "min": 1,
+      "max": 5,
+      "required": true
+    },
+    "quote": {
+      "type": "text",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "initials": {
+      "type": "string",
+      "maxLength": 4,
+      "required": true
+    }
+  }
+}
