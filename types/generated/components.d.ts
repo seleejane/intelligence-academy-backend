@@ -21,6 +21,16 @@ export interface CourseBadge extends Struct.ComponentSchema {
   };
 }
 
+export interface CourseCoursePreview extends Struct.ComponentSchema {
+  collectionName: 'components_course_course_previews';
+  info: {
+    displayName: 'Course Preview';
+  };
+  attributes: {
+    preview_url: Schema.Attribute.String;
+  };
+}
+
 export interface CourseInstructor extends Struct.ComponentSchema {
   collectionName: 'components_course_instructors';
   info: {
@@ -146,6 +156,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'course.audience': CourseAudience;
       'course.badge': CourseBadge;
+      'course.course-preview': CourseCoursePreview;
       'course.instructor': CourseInstructor;
       'course.lesson': CourseLesson;
       'course.module': CourseModule;

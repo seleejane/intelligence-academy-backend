@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_course_course_previews",
+  "info": {
+    "displayName": "Course Preview"
+  },
+  "options": {},
+  "attributes": {
+    "preview_url": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

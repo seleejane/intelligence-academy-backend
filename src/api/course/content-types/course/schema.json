@@ -33,29 +33,36 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "rating": {
       "type": "decimal",
+      "default": 0,
       "min": 0,
-      "max": 5,
-      "default": 0
+      "max": 5
     },
     "reviewCount": {
       "type": "integer",
-      "min": 0,
-      "default": 0
+      "default": 0,
+      "min": 0
     },
     "learnerCount": {
       "type": "integer",
-      "min": 0,
-      "default": 0
+      "default": 0,
+      "min": 0
     },
     "level": {
       "type": "enumeration",
-      "enum": ["Beginner", "Intermediate", "Advanced", "All Levels"],
+      "required": true,
       "default": "Beginner",
-      "required": true
+      "enum": [
+        "Beginner",
+        "Intermediate",
+        "Advanced",
+        "All Levels"
+      ]
     },
     "badges": {
       "type": "component",
@@ -93,9 +100,9 @@
     },
     "totalLessons": {
       "type": "integer",
-      "min": 0,
+      "required": true,
       "default": 0,
-      "required": true
+      "min": 0
     },
     "instructor": {
       "type": "component",
@@ -112,6 +119,14 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::course.course"
+    },
+    "Preview": {
+      "type": "component",
+      "component": "course.review",
+      "repeatable": true
+    },
+    "preview_url": {
+      "type": "string"
     }
   }
 }
