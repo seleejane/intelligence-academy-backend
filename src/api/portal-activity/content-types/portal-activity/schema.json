@@ -1,0 +1,151 @@
+{
+  "kind": "collectionType",
+  "collectionName": "portal_activities",
+  "info": {
+    "singularName": "portal-activity",
+    "pluralName": "portal-activities",
+    "displayName": "Portal Activity",
+    "description": "Append-oriented audit trail for customer, Clerk billing, and portal administration activity"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "eventId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "eventType": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "AUTHENTICATION",
+        "COURSE",
+        "BILLING",
+        "CUSTOMER",
+        "ADMINISTRATION",
+        "SYSTEM"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "actorType": {
+      "type": "enumeration",
+      "required": true,
+      "default": "SYSTEM",
+      "enum": [
+        "CUSTOMER",
+        "ADMIN",
+        "CLERK",
+        "STRAPI",
+        "SYSTEM"
+      ]
+    },
+    "actorClerkUserId": {
+      "type": "string"
+    },
+    "actorEmail": {
+      "type": "email"
+    },
+    "actorName": {
+      "type": "string"
+    },
+    "subjectType": {
+      "type": "enumeration",
+      "required": true,
+      "default": "SYSTEM",
+      "enum": [
+        "USER",
+        "COURSE",
+        "SUBSCRIPTION",
+        "PAYMENT",
+        "ACTIVITY",
+        "SYSTEM"
+      ]
+    },
+    "subjectId": {
+      "type": "string"
+    },
+    "courseSlug": {
+      "type": "string"
+    },
+    "courseTitle": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "required": true,
+      "default": "OPEN",
+      "enum": [
+        "OPEN",
+        "REVIEWED",
+        "RESOLVED",
+        "FAILED"
+      ]
+    },
+    "severity": {
+      "type": "enumeration",
+      "required": true,
+      "default": "INFO",
+      "enum": [
+        "INFO",
+        "SUCCESS",
+        "WARNING",
+        "CRITICAL"
+      ]
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD",
+      "maxLength": 3
+    },
+    "occurredAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "source": {
+      "type": "enumeration",
+      "required": true,
+      "default": "SYSTEM",
+      "enum": [
+        "CUSTOMER_DASHBOARD",
+        "ADMIN_PORTAL",
+        "CLERK_WEBHOOK",
+        "STRAPI",
+        "SYSTEM"
+      ]
+    },
+    "ipAddress": {
+      "type": "string"
+    },
+    "userAgent": {
+      "type": "text"
+    },
+    "metadata": {
+      "type": "json"
+    },
+    "adminNotes": {
+      "type": "text"
+    },
+    "reviewedBy": {
+      "type": "string"
+    },
+    "reviewedAt": {
+      "type": "datetime"
+    }
+  }
+}

@@ -6,6 +6,16 @@ export default {
   routes: [
     {
       method: 'GET',
+      path: '/courses/catalog',
+      handler: 'course.findCatalog',
+      config: {
+        auth: false,
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'GET',
       path: '/courses/slugs',
       handler: 'course.findSlugs',
       config: {

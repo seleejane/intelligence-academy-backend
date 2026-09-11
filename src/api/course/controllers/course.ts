@@ -55,6 +55,34 @@ const coursePopulate = {
 } satisfies Modules.Documents.Params.Populate.Any<'api::course.course'>;
 
 export default factories.createCoreController('api::course.course', ({ strapi }) => ({
+  async findCatalog(ctx) {
+    const courses = await strapi.documents('api::course.course').findMany({
+      status: 'published',
+      fields: [
+        'title',
+        'slug',
+        'category',
+        'description',
+        'rating',
+        'reviewCount',
+        'learnerCount',
+        'level',
+        'totalDuration',
+        'totalLessons',
+      ],
+      populate: {
+        coverImage: {
+          fields: mediaFields,
+        },
+      },
+      sort: ['title:asc'],
+    });
+
+    const sanitizedCourses = await this.sanitizeOutput!(courses, ctx);
+
+    return this.transformResponse!(sanitizedCourses);
+  },
+
   async findSlugs(ctx) {
     const courses = await strapi.documents('api::course.course').findMany({
       status: 'published',

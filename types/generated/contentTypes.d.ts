@@ -531,6 +531,102 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPortalActivityPortalActivity
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'portal_activities';
+  info: {
+    description: 'Append-oriented audit trail for customer, Clerk billing, and portal administration activity';
+    displayName: 'Portal Activity';
+    pluralName: 'portal-activities';
+    singularName: 'portal-activity';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    actorClerkUserId: Schema.Attribute.String;
+    actorEmail: Schema.Attribute.Email;
+    actorName: Schema.Attribute.String;
+    actorType: Schema.Attribute.Enumeration<
+      ['CUSTOMER', 'ADMIN', 'CLERK', 'STRAPI', 'SYSTEM']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'SYSTEM'>;
+    adminNotes: Schema.Attribute.Text;
+    amount: Schema.Attribute.Decimal;
+    category: Schema.Attribute.Enumeration<
+      [
+        'AUTHENTICATION',
+        'COURSE',
+        'BILLING',
+        'CUSTOMER',
+        'ADMINISTRATION',
+        'SYSTEM',
+      ]
+    > &
+      Schema.Attribute.Required;
+    courseSlug: Schema.Attribute.String;
+    courseTitle: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    currency: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 3;
+      }> &
+      Schema.Attribute.DefaultTo<'USD'>;
+    description: Schema.Attribute.Text;
+    eventId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    eventType: Schema.Attribute.String & Schema.Attribute.Required;
+    ipAddress: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::portal-activity.portal-activity'
+    > &
+      Schema.Attribute.Private;
+    metadata: Schema.Attribute.JSON;
+    occurredAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    reviewedAt: Schema.Attribute.DateTime;
+    reviewedBy: Schema.Attribute.String;
+    severity: Schema.Attribute.Enumeration<
+      ['INFO', 'SUCCESS', 'WARNING', 'CRITICAL']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'INFO'>;
+    source: Schema.Attribute.Enumeration<
+      [
+        'CUSTOMER_DASHBOARD',
+        'ADMIN_PORTAL',
+        'CLERK_WEBHOOK',
+        'STRAPI',
+        'SYSTEM',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'SYSTEM'>;
+    status: Schema.Attribute.Enumeration<
+      ['OPEN', 'REVIEWED', 'RESOLVED', 'FAILED']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'OPEN'>;
+    subjectId: Schema.Attribute.String;
+    subjectType: Schema.Attribute.Enumeration<
+      ['USER', 'COURSE', 'SUBSCRIPTION', 'PAYMENT', 'ACTIVITY', 'SYSTEM']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'SYSTEM'>;
+    summary: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userAgent: Schema.Attribute.Text;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1043,6 +1139,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::course.course': ApiCourseCourse;
+      'api::portal-activity.portal-activity': ApiPortalActivityPortalActivity;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
