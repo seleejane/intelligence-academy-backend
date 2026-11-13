@@ -87,6 +87,7 @@ export interface CourseLesson extends Struct.ComponentSchema {
     link: Schema.Attribute.String;
     preview: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    video: Schema.Attribute.Media<'videos'>;
   };
 }
 

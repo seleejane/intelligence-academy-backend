@@ -9,6 +9,11 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Server =>
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
+  http: {
+    serverOptions: {
+      requestTimeout: env.int('UPLOAD_REQUEST_TIMEOUT_MS', 15 * 60 * 1000),
+    },
+  },
 });
 
 export default config;

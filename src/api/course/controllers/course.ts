@@ -18,13 +18,22 @@ const coursePopulate = {
   coverImage: {
     fields: mediaFields,
   },
+  previewVideo: {
+    fields: mediaFields,
+  },
   badges: true,
   about: true,
   learningOutcomes: true,
   audiences: true,
   modules: {
     populate: {
-      lessons: true,
+      lessons: {
+        populate: {
+          video: {
+            fields: mediaFields,
+          },
+        },
+      },
     },
   },
   includes: true,
@@ -116,7 +125,23 @@ export default factories.createCoreController('api::course.course', ({ strapi })
       return ctx.notFound('Course not found');
     }
 
-    const sanitizedCourse = await this.sanitizeOutput!(course, ctx);
+    const courseWithPublicPreviews = {
+      ...course,
+      modules: course.modules?.map((module) => ({
+        ...module,
+        lessons: module.lessons?.map((lesson) =>
+          lesson.preview
+            ? lesson
+            : {
+                ...lesson,
+                link: null,
+                video: null,
+              }
+        ),
+      })),
+    };
+
+    const sanitizedCourse = await this.sanitizeOutput!(courseWithPublicPreviews, ctx);
 
     return this.transformResponse!(sanitizedCourse);
   },

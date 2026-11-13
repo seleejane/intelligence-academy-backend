@@ -127,6 +127,14 @@
     },
     "preview_url": {
       "type": "string"
+    },
+    "previewVideo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
     }
   }
 }

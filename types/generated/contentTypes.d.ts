@@ -490,6 +490,7 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     modules: Schema.Attribute.Component<'course.module', true>;
     Preview: Schema.Attribute.Component<'course.review', true>;
     preview_url: Schema.Attribute.String;
+    previewVideo: Schema.Attribute.Media<'videos'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Decimal &
       Schema.Attribute.SetMinMax<
